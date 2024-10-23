@@ -1,0 +1,15 @@
+[package]
+name = "client-plug-traits"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+url = {version="2.5"}
+cfg-if ="1.0"
+
+
+[features]
+default=["product_api_client", "tasks_tracker_api_client", "cache_api_client"]
+product_api_client=[]
+tasks_tracker_api_client=[]
+cache_api_client=[]
