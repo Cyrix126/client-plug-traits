@@ -41,12 +41,14 @@ if #[cfg(feature="tasks_tracker_api_client")] {
     where
         Self: Sized,
         {
+            /// uri can contain a password, that will be put in the right header by different implementations.
             fn new(uri: Url) -> Self;
-            async fn create_task(&self, new_task: impl NewTask) -> Result<impl ResponseNewTask, impl std::error::Error>;
-            async fn create_simple_task(&self, task_scope: String, task_name: String) -> Result<impl ResponseNewTask, impl std::error::Error>;
-            async fn update_task_progress(&self, task_location: &Url, new_progress: u8) -> Result<(), impl std::error::Error>;
-            async fn finish_task(&self, task_location: &Url, description_result: Option<&str>, payload_result: &[u8]) -> Result<(), impl std::error::Error>;
-            async fn abort_task(&self, task_location: &Url, description_result: Option<&str>, payload_result: &[u8]) -> Result<(), impl std::error::Error>;
+            async fn create_task(&self, new_task: impl NewTask, token: Option<&str>) -> Result<impl ResponseNewTask, impl std::error::Error>;
+            async fn create_simple_task(&self, task_scope: String, task_name: String, token: Option<&str>) -> Result<impl ResponseNewTask, impl std::error::Error>;
+            async fn update_task_progress(&self, task_location: &Url, new_progress: u8, token: Option<&str>) -> Result<(), impl std::error::Error>;
+            async fn finish_task(&self, task_location: &Url, description_result: Option<&str>, payload_result: &[u8], token:Option<&str>) -> Result<(), impl std::error::Error>;
+            async fn abort_task(&self, task_location: &Url, description_result: Option<&str>, payload_result: &[u8], token:Option<&str>) -> Result<(), impl std::error::Error>;
+            async fn get_task(&self, task_location: &Url, token: Option<&str>) -> Result<(), impl std::error::Error>;
         }
     }
 }
