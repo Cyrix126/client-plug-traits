@@ -25,9 +25,9 @@ if #[cfg(feature="tasks_tracker_api_client")] {
 cfg_if! {
 
 if #[cfg(feature = "bincode")] {
-use bincode::{Decode, Encode};
+use bincode::Decode;
     pub trait NewTask where
-    Self: Encode + Decode
+    Self: Decode
     {
         fn duration(&self) -> u32;
         fn scope(&self) -> &str;
